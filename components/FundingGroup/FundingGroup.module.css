@@ -1,0 +1,30 @@
+.container {
+  width: var(--sizes-100);
+  display: flex;
+  padding: var(--spacings-s) 0;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.calloutContainer {
+  width: var(--sizes-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid {
+  width: var(--sizes-100);
+  display: grid;
+  padding: var(--spacings-m) 0;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: var(--spacings-2xs);
+}
+
+
+@media screen and (max-width: 1200px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

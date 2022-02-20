@@ -1,0 +1,19 @@
+.container {
+  width: var(--sizes-100);
+  min-width: 768px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-family: var(--fonts-logo);
+  margin-bottom: var(--spacings-l);
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    min-width: 100%;
+  }
+}

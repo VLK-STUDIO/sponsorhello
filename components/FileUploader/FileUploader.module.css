@@ -1,0 +1,8 @@
+.container, .textContainer {
+  width: var(--sizes-100);
+  height: var(--sizes-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

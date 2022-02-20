@@ -1,0 +1,20 @@
+.container {
+  width: var(--sizes-100);
+  height: var(--sizes-l);
+  display: flex;
+  align-items: center;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: var(--spacings-s);
+}
+
+.linkContainer {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}

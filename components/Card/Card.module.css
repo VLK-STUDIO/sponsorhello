@@ -1,0 +1,15 @@
+.container {
+  padding: var(--spacings-s);
+  border-radius: var(--radii-m);
+  border: var(--borders-strong);
+  border-color: var(--colors-gray-lightest);
+  transition: var(--transitions-fast);
+  background-color: var(--colors-background);
+}
+
+.container:hover {
+  transform: scale(1.1) rotate3d(80, 10, -10, 10deg);
+  border-color: var(--colors-secondary);
+  box-shadow: var(--shadows-medium);
+  z-index: var(--z-indices-high);
+}
