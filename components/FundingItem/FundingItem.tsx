@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/Image";
+import Image from "next/image";
 import { FundingLink } from "./FundingLink";
 import { ProjectInfo } from "../../types/projects";
 import styles from "./FundingItem.module.css";
