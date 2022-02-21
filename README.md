@@ -1,4 +1,4 @@
-![Sponsorhello logo](https://sponsorello.org/logo.svg)
+![Sponsorhello logo](https://sponsorhello.org/logo.svg)
 
 ---
 
@@ -11,7 +11,7 @@
 
 With **Sponsorhello** you can check how many open source projects in your `package.json` are searching for funding in a couple of seconds.
 
-To use it, you just have to go to the home page ([here](https://sponsorello.org)) and drop a `package.json`, we will tell you all the projects you're using that are searching for your help and for each of them, all the links to directly fund those project.
+To use it, you just have to go to the home page ([here](https://sponsorhello.org)) and drop a `package.json`, we will tell you all the projects you're using that are searching for your help and for each of them, all the links to directly fund those project.
 
 If you're already funding some projects, we prepared a badge that you can use to say to the world how much you're kind:
 
@@ -33,7 +33,7 @@ After reading your `package.json` we retrieve from `npms` details about all the 
 
 Once we know the libraries you're using, we retrieve thought the `github graphql api` which of them are searching for funding.
 
-![How Sponsorhello works!](https://sponsorello.org/how-it-works.png "How Sponsorhello works!")
+![How Sponsorhello works!](https://sponsorhello.org/how-it-works.png "How Sponsorhello works!")
 
 > Shut out to [Excalidraw](https://excalidraw.com/) for the cool drawing
 
