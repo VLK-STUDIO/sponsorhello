@@ -1,7 +1,7 @@
+type DependencyType = "dependencies" | "devDependencies" | "peerDependencies";
+
 type PackageJson = {
-  dependencies: Record<string, string>;
-  devDependencies: Record<string, string>;
-  peerDependencies: Record<string, string>;
+  [K in DependencyType]?: Record<string, string>;
 };
 
 function getPackageNames(dependencies?: Record<string, string>) {
@@ -12,12 +12,16 @@ function getPackageNames(dependencies?: Record<string, string>) {
   return Object.keys(dependencies);
 }
 
-export function getPackageDependencies(packageJson: PackageJson) {
-  const { dependencies, devDependencies, peerDependencies } = packageJson;
-
-  return [
-    ...getPackageNames(dependencies),
-    ...getPackageNames(devDependencies),
-    ...getPackageNames(peerDependencies),
-  ];
+export function getPackageDependencies(
+  packageJson: PackageJson,
+  pick: DependencyType[] = [
+    "dependencies",
+    "devDependencies",
+    "peerDependencies",
+  ]
+) {
+  return pick.reduce(
+    (acc, curr) => [...acc, ...getPackageNames(packageJson[curr])],
+    [] as string[]
+  );
 }

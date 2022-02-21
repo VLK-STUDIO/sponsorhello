@@ -18,11 +18,13 @@ export default async function handler(
   const nameAndOwners = await getNpmPackagesInfo(req.body.dependencies);
 
   // Filtering the list to not have duplicated
-  const filteredNameAndOwner = nameAndOwners.filter((item, index, array) => {
-    const partial = array.slice(0, index);
+  const filteredNameAndOwner = nameAndOwners
+    .filter((item, index, array) => {
+      const partial = array.slice(0, index);
 
-    return !partial.find((curr) => curr.name === item.name);
-  });
+      return !partial.find((curr) => curr.name === item.name);
+    })
+    .sort((first, second) => first.owner.localeCompare(second.owner));
 
   // Fetch from github the project image and the funding links for each repository
   const groupedFundingLinks = (
@@ -35,18 +37,6 @@ export default async function handler(
   )
     // Not all the projects are searching for funding!
     .filter((item) => item.fundingLinks && item.fundingLinks.length > 0);
-
-  // Projects are ordered by much the owner contribute to the projects with different packages
-  groupedFundingLinks.sort((first, second) => {
-    const firstFrequency = groupedFundingLinks.filter(
-      (item) => item?.owner === first?.owner
-    ).length;
-    const secondFrequency = groupedFundingLinks.filter(
-      (item) => item?.owner === second?.owner
-    ).length;
-
-    return secondFrequency - firstFrequency;
-  });
 
   res.status(200).json(groupedFundingLinks);
 }

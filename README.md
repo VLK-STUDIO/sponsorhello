@@ -1,34 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Sponsorhello logo](https://sponsorello.org/logo.svg)
 
-## Getting Started
+---
 
-First, run the development server:
+[![Sponsorhello](https://img.shields.io/badge/We%20Sponsorhello%20Open%20Source-Do%20it%20too-0066ff)](https://sponsorhello.org)
 
-```bash
-npm run dev
-# or
-yarn dev
+---
+
+## How it works
+
+With **Sponsorhello** you can check how many open source projects in your `package.json` are searching for funding in a couple of seconds.
+
+To use it, you just have to go to the home page ([here](https://sponsorello.org)) and drop a `package.json`, we will tell you all the projects you're using that are searching for your help and for each of them, all the links to directly fund those project.
+
+If you're already funding some projects, we prepared a badge that you can use to say to the world how much you're kind:
+
+[![Sponsorhello](https://img.shields.io/badge/We%20Sponsorhello%20Open%20Source-Do%20it%20too-0066ff)](https://sponsorhello.org)
+
+You can place it wherever you want, like in your Github profile or on your website.
+
+To have it, this is the markdown:
+
+```
+[![Sponsorhello](https://img.shields.io/badge/We%20Sponsorhello%20Open%20Source-Do%20it%20too-0066ff)](https://sponsorhello.org)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### How we find the projects
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+We are using mostly 2 apis, [`npms api`](https://api-docs.npms.io/) and [`github graphql api`](https://docs.github.com/en/graphql).
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+After reading your `package.json` we retrieve from `npms` details about all the `dependencies`, `peerDependencies` and `devDependencies` you're using; Then, for each of them, we contact `npms` again to retrieve also the dependencies of your direct packages.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Once we know the libraries you're using, we retrieve thought the `github graphql api` which of them are searching for funding.
 
-## Learn More
+![How Sponsorhello works!](https://sponsorello.org/how-it-works.png "How Sponsorhello works!")
 
-To learn more about Next.js, take a look at the following resources:
+> Shut out to [Excalidraw](https://excalidraw.com/) for the cool drawing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Why Sponsorhello?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Sponsorhello** was born because in [VLK Studio](https://vlkstudio.com) we wanted to fund open source projects applying a _super_ simple process:
 
-## Deploy on Vercel
+- Define a `budget`
+- Select 20 open source projects we're using in our daily jobs
+- Subscribe for a `(budget / 20)` monthly subscription to these projects
+- We're happy and the world is a better place 🌎
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+After we started to do it, we thought that every company can do something like this, the budget doesn't matter, can be 20$ per month (so you're giving just 1$ per project) or 100, or 1000, if everyone will give something, the eco-system of projects will grow dramatically.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+So we created this website and here you are!
+
+### Fun fact
+
+The name **Sponsorhello** was chosen because:
+
+- It sounds italian (yep, we are from Italy 🍝 🤌 🍕 🇮🇹 )
+- The domain sponsorhello.org was available

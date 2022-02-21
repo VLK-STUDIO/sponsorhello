@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import { useProjects } from "../../contexts/ProjectsContext";
 
@@ -13,7 +12,7 @@ export const Home: React.VFC = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Sponsorello</h1>
+      <h1 className={styles.title}>Sponsorhello</h1>
       <PackageJsonUploader
         onUpload={setFundingLinks}
         isLoading={isLoading}

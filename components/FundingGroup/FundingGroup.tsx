@@ -66,8 +66,8 @@ export const FundingGroup: React.VFC<Props> = ({ fundingLinks, isLoading }) => {
         <Callout emoji="❤️">
           A total of <code>{fundingLinks.length}</code> projects you&apos;re
           using are searching for funding,{" "}
-          <Link href={`/how-we-count`} passHref>
-            <a target="_blank">Check how we count them</a>
+          <Link href={`/how-it-works`} passHref>
+            <a target="_blank">Check how we found them</a>
           </Link>
         </Callout>
       </div>

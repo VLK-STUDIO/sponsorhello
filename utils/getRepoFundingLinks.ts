@@ -1,9 +1,8 @@
 import { RepoInfo } from "../types/projects";
 import { githubClient } from "./githubClient";
 
-function getRepoFundingLinksQuery(name: string, owner: string) {
-  return `query RepoFundingLinks {
-  repository(name: "${name}", owner: "${owner}") {
+const repoFundingLinksQuery = `query RepoFundingLinks($name: String!, $owner: String!) {
+  repository(name: $name, owner: $owner) {
     fundingLinks {
       platform
       url
@@ -11,14 +10,12 @@ function getRepoFundingLinksQuery(name: string, owner: string) {
     openGraphImageUrl
   }
 }`;
-}
 
 export async function getRepoFundingLinks(
   name: string,
   owner: string
 ): Promise<RepoInfo> {
-  const query = getRepoFundingLinksQuery(name, owner);
-  const response = await githubClient(query);
+  const response = await githubClient(repoFundingLinksQuery, { name, owner });
   const fundingLinks = response?.data?.repository?.fundingLinks || [];
   const image = response?.data?.repository?.openGraphImageUrl;
 

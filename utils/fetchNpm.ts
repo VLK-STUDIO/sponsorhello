@@ -43,7 +43,8 @@ export async function fetchNpm(
       const packageInfo = newPackages[curr];
 
       const dependencies = getPackageDependencies(
-        packageInfo?.collected?.metadata || {}
+        packageInfo?.collected?.metadata || {},
+        ["dependencies", "peerDependencies"]
       );
 
       const dependingPackages = await fetchNpm(dependencies, {

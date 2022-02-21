@@ -1,12 +1,11 @@
 module.exports = {
-  github: "https://github.com/VLK-STUDIO/sponsorello",
-  projectLink: "https://github.com/VLK-STUDIO/sponsorello",
-  docsRepositoryBase: "https://github.com/VLK-STUDIO/sponsorello/blob/master",
-  titleSuffix: " – Sponsorello, sponsor the projects you love",
+  github: "https://github.com/VLK-STUDIO/sponsorhello",
+  projectLink: "https://github.com/VLK-STUDIO/sponsorhello",
+  docsRepositoryBase: "https://github.com/VLK-STUDIO/sponsorhello/blob/master",
+  titleSuffix: " – fund the projects you love",
   nextLinks: false,
   prevLinks: false,
   search: false,
-  customSearch: null, // customizable, you can use algolia for example
   darkMode: false,
   footer: true,
   footerText: `MIT ${new Date().getFullYear()} © VLK Studio.`,
@@ -14,8 +13,13 @@ module.exports = {
   floatTOC: true,
   logo: (
     <>
-      <svg>...</svg>
-      <span>Sponsorello, sponsor the projects you love</span>
+      <img
+        src="logo.svg"
+        width={150}
+        alt="Sponsorello logo"
+        style={{ marginRight: 10 }}
+      />
+      <span>fund the projects you love</span>
     </>
   ),
   head: (
@@ -26,19 +30,25 @@ module.exports = {
       <meta httpEquiv="Content-Language" content="en" />
       <meta
         name="description"
-        content="Sponsorello: sponsor the projects you love"
+        content="Sponsorhello: sponsor the projects you love"
       />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@VlkStudio" />
       <meta
         property="og:title"
-        content="Sponsorello: sponsor the projects you love"
+        content="Sponsorhello: fund the projects you love"
       />
       <meta
         property="og:description"
-        content="Sponsorello: sponsor the projects you love"
+        content="Sponsorhello: fund the projects you love"
       />
-      <meta name="apple-mobile-web-app-title" content="Sponsorello" />
+      <meta name="apple-mobile-web-app-title" content="Sponsorhello" />
+      <link
+        rel="icon"
+        href="/favicon.ico"
+        media="(prefers-color-scheme: light)"
+      />
+      <link rel="icon" href="/faviconWhite.ico" />
     </>
   ),
 };

@@ -6,3 +6,7 @@ html,
 body {
   font-family: var(--fonts-default) !important;
 }
+
+h1, h2, h2, h4 {
+  font-family: var(--fonts-logo);
+}
