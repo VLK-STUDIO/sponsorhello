@@ -1,4 +1,4 @@
-![Sponsorhello logo](https://sponsorhello.org/logo.svg)
+![Sponsorhello logo](https://sponsorhello.org/banner.png)
 
 ---
 
