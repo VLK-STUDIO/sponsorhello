@@ -3,7 +3,7 @@
 ---
 
 [![Sponsorhello](https://img.shields.io/badge/We%20Sponsorhello%20Open%20Source-Do%20it%20too-0066ff)](https://sponsorhello.org)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/92e1f9b9-9dbe-4357-b69a-92137c96aac3/deploy-status)](https://app.netlify.com/sites/inspiring-wright-610359/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/92e1f9b9-9dbe-4357-b69a-92137c96aac3/deploy-status)](https://app.netlify.com/sites/sponsorhello/deploys)
 
 ---
 
