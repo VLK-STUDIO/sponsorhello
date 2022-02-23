@@ -6,6 +6,7 @@ import Callout from "nextra-theme-docs/callout";
 import { RepoSkeleton, CalloutSkeleton } from "./Skeleton";
 import { FundingItem } from "../FundingItem";
 import { Card } from "../Card";
+import { BriefGuide } from "../BriefGuide";
 
 type Props = {
   fundingLinks?: ProjectInfo[];
@@ -25,8 +26,10 @@ export const FundingGroup: React.VFC<Props> = ({ fundingLinks, isLoading }) => {
     []
   );
 
+  const isEmpty = !fundingLinks || fundingLinks.length === 0;
+
   const renderedFundingLinks = useMemo(() => {
-    if (!fundingLinks || fundingLinks.length === 0) {
+    if (isEmpty) {
       return <></>;
     }
 
@@ -39,7 +42,7 @@ export const FundingGroup: React.VFC<Props> = ({ fundingLinks, isLoading }) => {
         image={image}
       />
     ));
-  }, [fundingLinks]);
+  }, [isEmpty, fundingLinks]);
 
   const callOut = useMemo(() => {
     if (isLoading) {
@@ -77,6 +80,7 @@ export const FundingGroup: React.VFC<Props> = ({ fundingLinks, isLoading }) => {
   return (
     <div className={styles.container}>
       {callOut}
+      {isEmpty && <BriefGuide />}
       <div className={styles.grid}>
         {isLoading && skeleton}
         {!isLoading && renderedFundingLinks}
