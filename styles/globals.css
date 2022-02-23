@@ -10,3 +10,14 @@ body {
 h1, h2, h2, h4 {
   font-family: var(--fonts-logo);
 }
+
+@media screen and (max-width: 768px) {
+  .hide-on-sm {
+    display: none;
+  }
+}
+
+.navbar-logo {
+  margin-right: var(--spacings-2xs);
+  width: 150px;
+}

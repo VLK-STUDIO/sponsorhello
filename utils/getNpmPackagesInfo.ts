@@ -12,6 +12,8 @@ function getRepositoryNameAndOwnerFromNpmResponse(
     return undefined;
   }
 
+  // The format of the repository url is something like
+  // git+https://github.com/{owner}/{name}.git
   const [owner, name] = url.replace(".git", "").split("/").slice(-2);
 
   if (!name || !owner) {
@@ -26,22 +28,27 @@ export async function getNpmPackagesInfo(
 ): Promise<PackageInfo[]> {
   const response = await fetchNpm(packageNames, { deep: true });
 
-  const packagesInfo = await Object.keys(response).reduce(
-    async (accPromise, packageName) => {
-      const acc = await accPromise;
-      const packageInfo = response[packageName];
+  const packagesInfo = Object.keys(response).reduce((acc, packageName) => {
+    const packageInfo = response[packageName];
 
-      const currentPackageNameAndOwners =
-        getRepositoryNameAndOwnerFromNpmResponse(packageInfo);
+    const currentPackageNameAndOwners =
+      getRepositoryNameAndOwnerFromNpmResponse(packageInfo);
 
-      if (currentPackageNameAndOwners) {
-        return [...acc, currentPackageNameAndOwners];
-      }
+    if (currentPackageNameAndOwners) {
+      return [...acc, currentPackageNameAndOwners];
+    }
 
-      return acc;
-    },
-    Promise.resolve([] as PackageInfo[])
+    return acc;
+  }, [] as PackageInfo[]);
+
+  return (
+    packagesInfo
+      // Filtering the list to not have duplicates
+      .filter((item, index, array) => {
+        const partial = array.slice(0, index);
+
+        return !partial.find((curr) => curr.name === item.name);
+      })
+      .sort((first, second) => first.owner.localeCompare(second.owner))
   );
-
-  return packagesInfo;
 }

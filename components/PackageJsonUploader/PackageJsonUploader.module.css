@@ -2,6 +2,7 @@
   width: var(--sizes-100);
   height: 150px;
   cursor: copy;
+  padding: var(--spacings-s);
   border: var(--borders-strong);
   display: flex;
   align-items: center;
@@ -22,4 +23,10 @@
 
 .container:hover {
   box-shadow: var(--shadows-medium);
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: var(--spacings-s);
+  }
 }

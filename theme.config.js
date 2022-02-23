@@ -13,13 +13,8 @@ module.exports = {
   floatTOC: true,
   logo: (
     <>
-      <img
-        src="logo.svg"
-        width={150}
-        alt="Sponsorello logo"
-        style={{ marginRight: 10 }}
-      />
-      <span>fund the projects you love</span>
+      <img src="logo.svg" alt="Sponsorello logo" className="navbar-logo" />
+      <span className="hide-on-sm">fund the projects you love</span>
     </>
   ),
   head: (
