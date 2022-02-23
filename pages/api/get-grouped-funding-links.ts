@@ -17,19 +17,10 @@ export default async function handler(
   //  List of packages used by the project
   const nameAndOwners = await getNpmPackagesInfo(req.body.dependencies);
 
-  // Filtering the list to not have duplicated
-  const filteredNameAndOwner = nameAndOwners
-    .filter((item, index, array) => {
-      const partial = array.slice(0, index);
-
-      return !partial.find((curr) => curr.name === item.name);
-    })
-    .sort((first, second) => first.owner.localeCompare(second.owner));
-
   // Fetch from github the project image and the funding links for each repository
   const groupedFundingLinks = (
     await Promise.all(
-      filteredNameAndOwner.map(async ({ name, owner }) => {
+      nameAndOwners.map(async ({ name, owner }) => {
         const { fundingLinks, image } = await getRepoFundingLinks(name, owner);
         return { name, owner, fundingLinks, image };
       })
