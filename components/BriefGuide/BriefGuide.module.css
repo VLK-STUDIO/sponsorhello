@@ -1,0 +1,31 @@
+.container {
+  width: var(--sizes-100);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.listItem {
+  padding: 0 var(--spacings-2xs);
+}
+
+.save {
+  list-style-type: "\1F4BE";
+}
+
+.fund {
+  list-style-type: "\1F381";
+}
+
+.enjoy {
+  list-style-type: "\1F389"
+}
+
+.readMore {
+  padding: var(--spacings-s) 0;
+  font-style: italic;
+  text-align: center;
+  width: var(--sizes-100);
+}
+
