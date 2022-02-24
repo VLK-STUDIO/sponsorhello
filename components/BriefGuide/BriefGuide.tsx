@@ -9,13 +9,13 @@ export const BriefGuide: React.VFC = () => {
       <h2>How it works</h2>
       <ul>
         <li className={clsx(styles.listItem, styles.save)}>
-          upload your package.json to Sponsorhello
+          Upload your package.json
         </li>
         <li className={clsx(styles.listItem, styles.fund)}>
-          fund your favorite projects
+          Pick the projects you want to support
         </li>
         <li className={clsx(styles.listItem, styles.enjoy)}>
-          Enjoy being a better person
+          Donate and enjoy the open source community
         </li>
       </ul>
       <div className={styles.readMore}>
