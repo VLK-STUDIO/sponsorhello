@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
 import { DropzoneState } from "react-dropzone";
-import { getPackageDependencies } from "../../utils/getPackageDependencies";
-import { ProjectInfo } from "../../types/projects";
-import { FileUploader, OnUpload } from "../FileUploader";
-import styles from "./PackageJsonUploader.module.css";
 import Loader from "react-spinners/PacmanLoader";
 import clsx from "clsx";
+import { ProjectInfo } from "../../types/projects";
+import { acceptedFileConfigs } from "../../utils/config";
+import { FileUploader, OnUpload } from "../FileUploader";
+import styles from "./PackageJsonUploader.module.css";
 
 type Props = {
   onUpload: (fundingLinks?: ProjectInfo[]) => void;
@@ -13,28 +13,37 @@ type Props = {
   setIsLoading: (isLoading: boolean) => void;
 };
 
+function getAcceptedFileExtensions() {
+  return acceptedFileConfigs.map((config) => {
+    const parts = config.name.split(".");
+
+    return `.${parts[parts.length - 1]}`;
+  });
+}
+
 export const PackageJsonUploader: React.VFC<Props> = ({
   onUpload,
   isLoading,
   setIsLoading,
 }) => {
-  const onReaderLoad = useCallback(
-    async (event: ProgressEvent<FileReader>) => {
-      if (!event.target || !event.target.result) {
-        return;
-      }
+  const onDrop: OnUpload = useCallback(
+    async (acceptedFiles) => {
+      setIsLoading(true);
       try {
-        const packageJson = JSON.parse(event.target.result as string);
-        const dependencies = getPackageDependencies(packageJson);
+        const formData = new FormData();
+
+        acceptedFiles.forEach((file) => {
+          formData.append("file", file);
+        });
 
         const response = await fetch("/api/get-grouped-funding-links", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ dependencies, deep: 1 }),
+          body: formData,
         });
+
         const groupedFundingLinks = await response.json();
 
-        onUpload(groupedFundingLinks.error ? [] : groupedFundingLinks);
+        onUpload(groupedFundingLinks || []);
       } catch (e) {
         onUpload([]);
       } finally {
@@ -42,16 +51,6 @@ export const PackageJsonUploader: React.VFC<Props> = ({
       }
     },
     [onUpload, setIsLoading]
-  );
-
-  const onDrop: OnUpload = useCallback(
-    async (acceptedFiles) => {
-      const reader = new FileReader();
-      setIsLoading(true);
-      reader.onload = onReaderLoad;
-      reader.readAsText(acceptedFiles[0]);
-    },
-    [onReaderLoad, setIsLoading]
   );
 
   const renderText = useCallback(
@@ -74,7 +73,7 @@ export const PackageJsonUploader: React.VFC<Props> = ({
       className={clsx(styles.container, isLoading && styles.loading)}
       options={{
         onDrop,
-        accept: ".json",
+        accept: getAcceptedFileExtensions(),
         multiple: false,
         disabled: isLoading,
       }}

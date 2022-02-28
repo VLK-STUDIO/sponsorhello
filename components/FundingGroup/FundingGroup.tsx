@@ -80,7 +80,7 @@ export const FundingGroup: React.VFC<Props> = ({ fundingLinks, isLoading }) => {
   return (
     <div className={styles.container}>
       {callOut}
-      {isEmpty && <BriefGuide />}
+      {isEmpty && !isLoading && <BriefGuide />}
       <div className={styles.grid}>
         {isLoading && skeleton}
         {!isLoading && renderedFundingLinks}
