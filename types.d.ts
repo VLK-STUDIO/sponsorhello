@@ -8,3 +8,13 @@ declare module "nextra-theme-docs/callout" {
 
   export default Callout;
 }
+
+declare module "nextra-theme-docs/bleed" {
+  export type BleedProps = {
+    full?: boolean;
+  };
+
+  const Bleed: React.FC<BleedProps>;
+
+  export default Bleed;
+}

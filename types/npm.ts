@@ -179,3 +179,12 @@ export interface NpmPackage {
 }
 
 export type NpmResponse = Record<string, NpmPackage>;
+
+export type DependencyType =
+  | "dependencies"
+  | "devDependencies"
+  | "peerDependencies";
+
+export type PackageJson = {
+  [K in DependencyType]?: Record<string, string>;
+};
