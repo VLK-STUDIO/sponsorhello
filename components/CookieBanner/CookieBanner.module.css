@@ -1,0 +1,17 @@
+.container {
+  position: absolute;
+  bottom: var(--spacings-m);
+  right: var(--spacings-m);
+  z-index: var(--z-indices-highest);
+}
+
+.closeIcon {
+  cursor: pointer;
+  position: absolute;
+  top: var(--spacings-3xs);
+  right: var(--spacings-3xs);
+}
+
+.container:hover {
+  border-color: var(--colors-secondary);
+}

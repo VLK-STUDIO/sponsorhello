@@ -8,7 +8,7 @@
 }
 
 .container:hover {
-  transform: scale(1.1) rotate3d(80, 10, -10, 10deg);
+  transform: scale(1.01) rotate3d(80, 5, -5, 5deg);
   border-color: var(--colors-secondary);
   box-shadow: var(--shadows-medium);
   z-index: var(--z-indices-high);
