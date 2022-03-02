@@ -1,8 +1,39 @@
+.overlay {
+  position: fixed;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: transparent;
+  z-index: var(--z-indices-low);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+}
+
+.overlayVisible {
+  display: unset;
+  backdrop-filter: blur(3.5px);
+}
+
 .container {
-  position: absolute;
+  position: fixed;
+  cursor: pointer;
   bottom: var(--spacings-m);
   right: var(--spacings-m);
   z-index: var(--z-indices-highest);
+  transition: var(--transitions-fast);
+}
+
+.expanded {
+  height: 80vh;
+  max-width: 60vh;
+  overflow-y: scroll;
+  left: 50%;
+  bottom: 50%;
+  right: unset;
+  transform: translate(-50%, 50%);
+  box-shadow: var(--shadows-light);
 }
 
 .closeIcon {
@@ -12,6 +43,22 @@
   right: var(--spacings-3xs);
 }
 
+.container.expanded:hover {
+  transform: translate(-50%, 50%);
+}
+
 .container:hover {
   border-color: var(--colors-secondary);
+
+}
+
+
+@media screen and (max-width: 768px) {
+  .container {
+    bottom: var(--spacings-m);
+    left: 50%;
+    right: unset;
+    width: 90%;
+    transform: translate(-50%);
+  }
 }
