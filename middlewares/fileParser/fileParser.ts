@@ -14,7 +14,9 @@ function getFileConfig(
 
   return acceptedFileConfigs.find(
     (config) =>
-      config.name === file.originalFilename && config.mimetype === file.mimetype
+      file.originalFilename &&
+      config.name.test(file.originalFilename) &&
+      config.mimetype === file.mimetype
   );
 }
 

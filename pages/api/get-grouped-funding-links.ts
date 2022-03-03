@@ -20,6 +20,7 @@ const handler = nc<NextApiRequest, NextApiResponse>({
 })
   .use(fileParser)
   .post(async (req, res) => {
+    console.log(req.body.platform, req.body.content);
     platformsClient.parseFileContent(req.body.platform, req.body.content);
 
     const groupedFundingLinks = await platformsClient.getFunding(

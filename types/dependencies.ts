@@ -1,5 +1,6 @@
 export type DependenciesFileConfig = {
-  name: string;
+  name: RegExp;
+  extension: string;
   mimetype: string;
   platform: string;
 };

@@ -1,40 +1,79 @@
-import React from "react";
-import {
-  DropEvent,
-  useDropzone,
-  FileRejection,
-  DropzoneOptions,
-  DropzoneState,
-} from "react-dropzone";
-import styles from "./FileUploader.module.css";
+import React, { useCallback } from "react";
+import Loader from "react-spinners/PacmanLoader";
 import clsx from "clsx";
-
-export type OnUpload = <T extends File>(
-  acceptedFiles: T[],
-  fileRejections: FileRejection[],
-  event: DropEvent
-) => void;
+import { ProjectInfo } from "../../types/projects";
+import { acceptedFileConfigs } from "../../utils/config";
+import { DropZone, OnUpload } from "./DropZone";
+import styles from "./FileUploader.module.css";
 
 type Props = {
-  children: (state: DropzoneState) => string | React.ReactElement;
-  options?: DropzoneOptions;
-  className?: string;
+  onUpload: (fundingLinks?: ProjectInfo[]) => void;
+  isLoading?: boolean;
+  setIsLoading: (isLoading: boolean) => void;
 };
 
+function getAcceptedFileExtensions() {
+  return acceptedFileConfigs.map(({ extension }) => extension);
+}
+
 export const FileUploader: React.VFC<Props> = ({
-  options,
-  children,
-  className,
+  onUpload,
+  isLoading,
+  setIsLoading,
 }) => {
-  const dropZoneState = useDropzone({
-    ...options,
-  });
-  const { getRootProps, getInputProps } = dropZoneState;
+  const onDrop: OnUpload = useCallback(
+    async (acceptedFiles) => {
+      setIsLoading(true);
+      try {
+        const formData = new FormData();
+
+        acceptedFiles.forEach((file) => {
+          formData.append("file", file);
+        });
+
+        const response = await fetch("/api/get-grouped-funding-links", {
+          method: "POST",
+          body: formData,
+        });
+
+        const groupedFundingLinks = await response.json();
+
+        onUpload(groupedFundingLinks || []);
+      } catch (e) {
+        onUpload([]);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [onUpload, setIsLoading]
+  );
+
+  const renderText = useCallback(
+    ({ isDragActive }) => {
+      if (isLoading) {
+        return <Loader size={24} color="var(--colors-gray-light)" />;
+      }
+
+      if (isDragActive) {
+        return "Drop your package.json here ...";
+      }
+
+      return "Drag 'n' drop your package.json, or click to select it from your computer";
+    },
+    [isLoading]
+  );
 
   return (
-    <div {...getRootProps()} className={clsx(styles.container, className)}>
-      <input {...getInputProps()} />
-      <div className={styles.textContainer}>{children(dropZoneState)}</div>
-    </div>
+    <DropZone
+      className={clsx(styles.container, isLoading && styles.loading)}
+      options={{
+        onDrop,
+        accept: getAcceptedFileExtensions(),
+        multiple: false,
+        disabled: isLoading,
+      }}
+    >
+      {renderText}
+    </DropZone>
   );
 };
