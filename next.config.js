@@ -5,6 +5,7 @@ const nextConfig = {
     domains: [
       "avatars.githubusercontent.com",
       "repository-images.githubusercontent.com",
+      "opengraph.githubassets.com",
     ],
   },
 };
