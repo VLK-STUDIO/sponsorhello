@@ -18,7 +18,9 @@ function getFileConfig(
   );
 }
 
-async function getFileListFromRequest(req: NextApiRequest) {
+async function getFilesFromRequest(
+  req: NextApiRequest
+): Promise<formidable.File[]> {
   const body = await new Promise<formidable.Files>((resolve, reject) => {
     const form = new formidable.IncomingForm({
       multiples: true,
@@ -36,9 +38,13 @@ async function getFileListFromRequest(req: NextApiRequest) {
 
   const dependenciesFiles = body.file;
 
+  if (!dependenciesFiles) {
+    return [];
+  }
+
   return Array.isArray(dependenciesFiles)
-    ? dependenciesFiles[0]
-    : dependenciesFiles;
+    ? dependenciesFiles
+    : [dependenciesFiles];
 }
 
 const fileParser: Middleware<NextApiRequest, NextApiResponse> = async (
@@ -46,22 +52,34 @@ const fileParser: Middleware<NextApiRequest, NextApiResponse> = async (
   _,
   next
 ) => {
-  const file = await getFileListFromRequest(req);
+  const files = await getFilesFromRequest(req);
 
-  if (!file) {
-    return next(new Error("Unrecognized file"));
+  if (files.length === 0) {
+    return next(new Error("No files received"));
   }
 
-  const config = getFileConfig(file);
+  const configs = files.map(getFileConfig);
 
-  if (!config) {
-    return next(new Error("File not supported"));
+  if (configs.some((config) => !config)) {
+    return next(new Error("One or more files are not supported"));
   }
 
-  const content = fs.readFileSync(file.filepath, { encoding: "utf8" });
-  fs.unlinkSync(file.filepath);
+  const platforms = new Set(configs.map((config) => config!.platform));
+  if (platforms.size > 1) {
+    return next(
+      new Error("All uploaded files must belong to the same platform")
+    );
+  }
 
-  req.body = { platform: config.platform, content };
+  const platform = configs[0]!.platform;
+
+  const contents = files.map((file) => {
+    const content = fs.readFileSync(file.filepath, { encoding: "utf8" });
+    fs.unlinkSync(file.filepath);
+    return content;
+  });
+
+  req.body = { platform, contents };
 
   next();
 };

@@ -3,11 +3,10 @@ import { RepositoryInfo } from "./repository";
 export interface PlatformAdapter {
   dependencies: string[];
   /**
-   * This method will parse the content of the received file and extract the dependencies
-   * used inside the project and populate the internal variable `dependencies`,
-   * it also return the list of the extracted dependencies
+   * Parses one or more file contents, merges and deduplicates dependencies,
+   * populates `dependencies`, and returns the resulting list.
    */
-  parseFileContent(content: string): string[];
-  getDependencies(content: string): string[];
+  parseFilesContent(contents: string[]): string[];
+  getDependencies(): string[];
   getRepositories(): Promise<RepositoryInfo[]>;
 }
