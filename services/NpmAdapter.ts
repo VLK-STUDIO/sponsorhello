@@ -16,13 +16,16 @@ export class NpmAdapter implements PlatformAdapter {
   repositories: RepositoryInfo[] = [];
   cache = new Map<string, NpmPackage>();
 
-  parseFileContent(content: string) {
-    const packageJson = JSON.parse(content);
-    this.dependencies = this.getPackageJsonDependencies(packageJson);
+  parseFilesContent(contents: string[]): string[] {
+    const merged = contents.flatMap((content) => {
+      const packageJson = JSON.parse(content);
+      return this.getPackageJsonDependencies(packageJson);
+    });
+    this.dependencies = merged.filter((dep, idx) => merged.indexOf(dep) === idx);
     return this.getDependencies();
   }
 
-  getDependencies() {
+  getDependencies(): string[] {
     return this.dependencies;
   }
 

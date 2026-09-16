@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse, PageConfig } from "next";
 import nc from "next-connect";
-import fileParser from "../../middlewares/fileParser";
+import fileParser, { type ApiRequestBody } from "../../middlewares/fileParser";
 import platformsClient from "../../services";
 
 export const config: PageConfig = {
@@ -20,11 +20,10 @@ const handler = nc<NextApiRequest, NextApiResponse>({
 })
   .use(fileParser)
   .post(async (req, res) => {
-    platformsClient.parseFileContent(req.body.platform, req.body.content);
+    const { platform, contents } = req.body as ApiRequestBody;
+    platformsClient.parseFilesContent(platform, contents);
 
-    const groupedFundingLinks = await platformsClient.getFunding(
-      req.body.platform
-    );
+    const groupedFundingLinks = await platformsClient.getFunding(platform);
 
     res.status(200).json(groupedFundingLinks);
   });

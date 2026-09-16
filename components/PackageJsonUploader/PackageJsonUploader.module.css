@@ -1,3 +1,10 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacings-xs);
+  width: var(--sizes-100);
+}
+
 .container {
   width: var(--sizes-100);
   height: 150px;
@@ -23,6 +30,96 @@
 
 .container:hover {
   box-shadow: var(--shadows-medium);
+}
+
+.rejectionError {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  font-size: var(--font-sizes-s);
+  font-weight: var(--font-weights-semi-bold);
+  color: var(--colors-error-darkest);
+  background: var(--colors-error-lightest);
+  border-radius: var(--radii-s);
+  padding: var(--spacings-2xs) var(--spacings-s);
+  border: var(--borders-strong);
+  border-color: var(--colors-error-lighter);
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--colors-gray-darker);
+  font-size: var(--font-sizes-l);
+  line-height: var(--line-heights-none);
+  transition: color var(--transitions-fast);
+}
+
+.removeButton:disabled {
+  cursor: not-allowed;
+  opacity: var(--opacities-medium);
+}
+
+.fileList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: var(--borders-thin);
+  border-radius: var(--radii-s);
+  overflow: hidden;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacings-2xs) var(--spacings-xs);
+  border-bottom: 1px solid var(--colors-gray-lighter);
+  margin: 0;
+}
+
+.fileItem:last-child {
+  border-bottom: none;
+}
+
+.fileName {
+  font-size: var(--font-sizes-s);
+  font-weight: var(--font-weights-medium);
+  color: var(--colors-text);
+}
+
+.submitButton {
+  width: var(--sizes-100);
+  padding: var(--spacings-2xs) var(--spacings-xs);
+  background: var(--colors-gray-darkest);
+  color: var(--colors-white);
+  border: var(--borders-strong);
+  border-color: var(--colors-gray-darkest);
+  border-radius: var(--radii-s);
+  font-family: var(--fonts-default);
+  font-weight: var(--font-weights-bold);
+  font-size: var(--font-sizes-m);
+  cursor: pointer;
+  transition:
+    transform var(--transitions-fast),
+    box-shadow var(--transitions-fast);
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadows-strong);
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadows-none);
+}
+
+.submitButton:disabled {
+  cursor: not-allowed;
+  opacity: var(--opacities-medium);
 }
 
 @media screen and (max-width: 768px) {

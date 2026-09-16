@@ -17,9 +17,9 @@ export class PlatformsClient {
     return service;
   }
 
-  parseFileContent(platform: string, content: string) {
+  parseFilesContent(platform: string, contents: string[]): void {
     const service = this.get(platform);
-    service.parseFileContent(content);
+    service.parseFilesContent(contents);
   }
 
   async getFunding(platform: string) {

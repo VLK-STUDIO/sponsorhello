@@ -1,4 +1,4 @@
 export type ApiRequestBody = {
   platform: string;
-  dependencies: string[];
+  contents: string[];
 };
